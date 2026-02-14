@@ -21,7 +21,7 @@ source "vmware-iso" "proxmox" {
   headless                       = true
   skip_export                    = true
   guest_os_type                  = var.guest_os_type
-  vm_name                        = "proxmox-auto"
+  vm_name                        = "proxmox"
   vhv_enabled                    = true
 
   cpus                           = 4
@@ -68,8 +68,6 @@ build {
 
   provisioner "shell" {
     scripts = [
-      "./provisioning/shell/extend-lvm.sh",
-      "./provisioning/shell/disable-apt-repos.sh",
       "./provisioning/shell/install-packages.sh"
     ]
   }
@@ -78,7 +76,13 @@ build {
     playbook_file   = "./provisioning/ansible/playbook.yaml"
     inventory_file  = "./provisioning/ansible/hosts.yaml"
     host_vars       = "./provisioning/ansible/host_vars"
-    role_paths      = [ "./provisioning/ansible/roles/users" ]
+    role_paths      = [ 
+      "./provisioning/ansible/roles/accounts", 
+      "./provisioning/ansible/roles/storage", 
+      "./provisioning/ansible/roles/repos",
+      "./provisioning/ansible/roles/ssh",
+      "./provisioning/ansible/roles/nag_screen"
+    ]
     galaxy_file     = "./provisioning/ansible/requirements.yaml"
     extra_arguments = [ "-vvvv" ]
   }

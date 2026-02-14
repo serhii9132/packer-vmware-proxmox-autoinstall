@@ -1,5 +1,5 @@
 locals {
-    output_directory = "artifacts/${formatdate("YYYY-MM-DD_hh-mm", timestamp())}"
+    output_directory = "builds/${formatdate("YYYY-MM-DD_hh-mm", timestamp())}"
 
     iso_url = "https://enterprise.proxmox.com/iso"
     iso_source = "./.cache"

@@ -1,6 +1,6 @@
 .env
 .cache
-artifacts
+builds
 packer_cache
 host_vars
 logs
