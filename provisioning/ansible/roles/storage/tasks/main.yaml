@@ -1,0 +1,7 @@
+---
+- name: Extend root partition
+  community.general.lvol:
+    vg: pve
+    lv: root
+    size: +100%FREE
+    resizefs: true
