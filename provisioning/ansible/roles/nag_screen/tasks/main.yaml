@@ -1,5 +1,5 @@
 ---
-- name: Create {{ __nag_screen_script_path }} directory
+- name: Create directory
   ansible.builtin.file:
     path: "{{ __nag_screen_script_path }}"
     state: directory

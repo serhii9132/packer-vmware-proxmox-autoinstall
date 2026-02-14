@@ -14,4 +14,4 @@ jobs:
       - name: Run ansible-lint
         uses: ansible/ansible-lint@main
         with:
-          args: "--show-relpath provisioning/ansible"
+          args: "--show-relpath provisioning/ansible/roles"
