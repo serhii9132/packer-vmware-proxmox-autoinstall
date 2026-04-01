@@ -2,7 +2,7 @@ packer {
   required_plugins {
     vmware = {
       source = "github.com/hashicorp/vmware"
-      version = "~> 1"
+      version = "1.2.0"
     }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
@@ -76,19 +76,15 @@ build {
     playbook_file   = "./provisioning/ansible/playbook.yaml"
     inventory_file  = "./provisioning/ansible/hosts.yaml"
     host_vars       = "./provisioning/ansible/host_vars"
-    role_paths      = [ 
-      "./provisioning/ansible/roles/accounts", 
-      "./provisioning/ansible/roles/storage", 
-      "./provisioning/ansible/roles/repos",
-      "./provisioning/ansible/roles/ssh",
-      "./provisioning/ansible/roles/nag_screen"
-    ]
     galaxy_file     = "./provisioning/ansible/requirements.yaml"
     extra_arguments = [ "-vvvv" ]
   }
 
   provisioner "shell" {
-    script = "./provisioning/shell/zero-space.sh"
+    scripts = [
+      "./provisioning/shell/remove-ansible.sh",
+      "./provisioning/shell/zero-space.sh"
+    ]
   }
 
   post-processor "vagrant" {

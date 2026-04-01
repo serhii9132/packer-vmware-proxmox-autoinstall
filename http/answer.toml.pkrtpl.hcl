@@ -7,7 +7,7 @@ timezone = "UTC"
 reboot-mode = "reboot"
 root-password-hashed = "${var.ssh_password}"
 root-ssh-keys = [
-    "${var.ssh_pub_key}"
+    ${var.ssh_pub_key}
 ]
 
 [network]
