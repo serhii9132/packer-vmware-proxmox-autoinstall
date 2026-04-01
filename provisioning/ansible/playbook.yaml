@@ -3,12 +3,12 @@
   hosts: localhost
   gather_facts: true
   roles:
-    - storage
-    - repos
+    - serhii9132.proxmox_bootstrap.storage
+    - serhii9132.proxmox_bootstrap.apt_repos
+    - serhii9132.proxmox_bootstrap.nag_screen
     - serhii9132.base_layer.common
     - serhii9132.base_layer.utilities
-    - ssh
-    - serhii9132.base_layer.git
-    - accounts
-    - nag_screen
+    - serhii9132.proxmox_bootstrap.ssh
+    # - serhii9132.base_layer.git
+    - serhii9132.proxmox_bootstrap.accounts
   
