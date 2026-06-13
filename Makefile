@@ -27,7 +27,7 @@ proxmox-8:
 	$(call build-vm,8,proxmox-ve_8.4-1.iso,d237d70ca48a9f6eb47f95fd4fd337722c3f69f8106393844d027d28c26523d8,debian12-64)
 
 proxmox-9:
-	$(call build-vm,9,proxmox-ve_9.1-1.iso,6d8f5afc78c0c66812d7272cde7c8b98be7eb54401ceb045400db05eb5ae6d22,debian13-64)
+	$(call build-vm,9,proxmox-ve_9.2-1.iso,4e88fe416df9b527624a175f24c9aa07c714d3332afb1ee3dbf3879573ef2c6c,debian13-64)
 
 clean:
 	@echo "Cleaning up builds and caches..."
