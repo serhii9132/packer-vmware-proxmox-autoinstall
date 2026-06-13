@@ -5,9 +5,9 @@ keyboard = "en-us"
 mailto = "root@pve"
 timezone = "UTC"
 reboot-mode = "reboot"
-root-password-hashed = "${var.ssh_password}"
+root-password-hashed = "${var.hash_ssh_pass}"
 root-ssh-keys = [
-    ${var.ssh_pub_key}
+    ${var.public_key}
 ]
 
 [network]
