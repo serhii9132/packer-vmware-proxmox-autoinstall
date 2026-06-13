@@ -5,9 +5,9 @@ locals {
     iso_source = "./.cache"
 
     answer_filename = "answer.toml"
-    http_dir = "/http"
+    cd_label = "cidata"
     unattended = {
-      "/${local.answer_filename}" = templatefile("${local.http_dir}/answer.toml.pkrtpl.hcl", { var = var })
+      "/${local.answer_filename}" = templatefile("./${local.cd_label}/answer.toml.pkrtpl.hcl", { var = var })
     }
 }
 
@@ -25,30 +25,24 @@ variable "iso_checksum" {
 
 variable "ip" {
     type = string
-    default = env("IP")
 }
 
 variable "mask" {
     type = string
-    default = env("MASK")
 }
 
 variable "gateway" {
     type = string
-    default = env("GATEWAY")
 }
 
-variable "ssh_password" {
+variable "hash_ssh_pass" {
     type = string
-    default = env("PASSWORD")
 }
 
-variable "ssh_pub_key" {
+variable "public_key" {
     type = string
-    default = env("PUBLIC_KEY")
 }
 
-variable "ssh_private_key_file" {
+variable "private_key_file" {
     type = string
-    default = env("PRIVATE_KEY_FILE")
 }

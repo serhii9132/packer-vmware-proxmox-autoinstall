@@ -2,15 +2,15 @@ packer {
   required_plugins {
     vmware = {
       source = "github.com/hashicorp/vmware"
-      version = "1.2.0"
+      version = "2.1.1"
     }
     vagrant = {
       source  = "github.com/hashicorp/vagrant"
-      version = "~> 1"
+      version = "1.1.7"
     }
     ansible = {
       source  = "github.com/hashicorp/ansible"
-      version = "~> 1"
+      version = "1.1.4"
     }
   }
 }
@@ -40,7 +40,8 @@ source "vmware-iso" "proxmox" {
 
   communicator                   = "ssh"
 
-  http_content                   = local.unattended                  
+  cd_label                      = local.cd_label
+  cd_content                    = local.unattended
 
   vnc_bind_address               = "127.0.0.1"
   vnc_port_min                   = 5963
@@ -49,16 +50,16 @@ source "vmware-iso" "proxmox" {
   
   ssh_host                       = var.ip
   ssh_username                   = "root"
-  ssh_private_key_file           = var.ssh_private_key_file
+  ssh_private_key_file           = var.private_key_file
   ssh_timeout                    = "30m"
 
   boot_wait                      = "10s"
   boot_command = [
-    "<down><down><enter>",
-    "<down><down><down><enter>",
-    "<wait30s>",
-    "proxmox-fetch-answer http http://{{ .HTTPIP }}:{{ .HTTPPort }}/${local.answer_filename} > /run/automatic-installer-answers<enter><wait>exit<enter>",
-    "<wait3m>"
+      "<down><down><down><enter><wait5s>",
+      "<down><down><down><down><down><enter>",
+      "<wait45s>",
+      "proxmox-fetch-answer partition ${local.cd_label} > /run/automatic-installer-answers<enter><wait>exit<enter>",
+      "<wait3m>"
   ]
   shutdown_command               = "poweroff"
 }
@@ -88,7 +89,6 @@ build {
   }
 
   post-processor "vagrant" {
-    compression_level    = 6
     keep_input_artifact  = true
     output               = "${local.output_directory}/proxmox.box"
   }
